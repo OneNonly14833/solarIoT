@@ -24,8 +24,9 @@ export class AuthenticationService {
     login(email: string, password: string): void {
         auth().signInWithEmailAndPassword(email, password).then((success) => {
             console.log('Redirect to homepage');
+            localStorage.setItem('currentUser', JSON.stringify(success));
             this.status.next(false);
-            this.router.navigate(['/homepage'], { relativeTo: this.route});
+            this.router.navigate(['/dashboard'], { relativeTo: this.route});
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -34,6 +35,8 @@ export class AuthenticationService {
     }
     logout(): void{
         auth().signOut().then((success) => {
+            localStorage.removeItem('currentUser');
+            this.router.navigate(['/login']);
             this.status.next(true);
         });
     }

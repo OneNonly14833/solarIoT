@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-// import * as $ from 'jquery';
-// import * as CanvasJS from '../assets/canvasjs.min';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { multi } from './data';
+import { AuthenticationService } from '../../app/authentication.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 export interface Item { name: string; }
 
@@ -13,48 +16,62 @@ export interface Item { name: string; }
 })
 
 export class HomepageComponent implements OnInit {
+  checkUser = true;
   private itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<any[]>;
-  constructor(private afs: AngularFirestore){
+  multi: any[];
+  view: any[] = [700, 300];
+
+  // options
+  legend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Year';
+  yAxisLabel: string = 'Population';
+  timeline: boolean = true;
+
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
+  constructor(private afs: AngularFirestore, private authC: AuthenticationService, private authCheck: AngularFireAuth){
       this.itemsCollection = afs.collection('items');
       this.items = this.itemsCollection.valueChanges();
+      Object.assign(this, { multi });
+      this.authC.userStatus$.subscribe(value => { //Using JSON observable to monitor Authentication Service user login
+        // console.log(value);
+        // this.checkUser = value;
+        if (localStorage.getItem('currentUser')) {
+          this.checkUser = false;
+          console.log('User exist');
+        }else{
+          this.checkUser = true;
+          console.log('No user');
+        }
+      });
+      authCheck.onAuthStateChanged((success) => { // Replaces previous function
+        if (success) {
+          this.checkUser = false;
+          console.log('User logged in');
+        }
+      });
   }
-  ngOnInit(): void {
-    // const dataPoints = [];
-    // let dpsLength = 0;
-    // const chart = new CanvasJS.Chart("chartContainer",{
-    //   exportEnabled: true,
-    //   title:{
-    //     text:"Live Chart with Data-Points from External JSON"
-    //   },
-    //   data: [{
-    //     type: "spline",
-    //     dataPoints : dataPoints,
-    //   }]
-    // });
-    // any.getJSON('https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=25&length=20&type=json&callback=?', (data) => {
-    //   any.each(data, function(key, value){
-    //     dataPoints.push({x: value[0], y: parseInt(value[1])});
-    //   });
-    //   dpsLength = dataPoints.length;
-    //   chart.render();
-    //   updateChart();
-    // });
-    // function updateChart() {
-    //   $.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=" + (dpsLength + 1) + "&ystart=" + (dataPoints[dataPoints.length - 1].y) + "&length=1&type=json&callback=?", function(data) {
-    //   $.each(data, function(key, value) {
-    //     dataPoints.push({
-    //       x: parseInt(value[0]),
-    //       y: parseInt(value[1])
-    //       });
-    //       dpsLength++;
-    //     });
-    //     if (dataPoints.length >  20 ) {
-    //           dataPoints.shift();
-    //         }
-    //     chart.render();
-    //     setTimeout(function(){updateChart()}, 1000);
-    //   });
-    // }
+  logout(): void{
+    this.authC.logout();
+  }
+  ngOnInit(): void {}
+  onSelect(data): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }

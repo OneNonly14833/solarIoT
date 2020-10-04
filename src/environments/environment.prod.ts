@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
     firebase: {
-        apiKey: "AIzaSyDUPIAkzfjXU7nf-kFRWtg5MK8Ewi3r-Ys",
-        authDomain: "cadense-669b3.firebaseapp.com",
-        databaseURL: "https://cadense-669b3.firebaseio.com",
-        projectId: "cadense-669b3",
-        storageBucket: "cadense-669b3.appspot.com",
-        messagingSenderId: "316396046095",
-        appId: "1:316396046095:web:428d7093e56bf70bd4607a",
-        measurementId: "G-KB4XH546JM"
+      apiKey: 'AIzaSyD6hztQYLshAO2akQBxlQ0g-VUy2pz-X10',
+      authDomain: 'zeo-iot.firebaseapp.com',
+      databaseURL: 'https://zeo-iot.firebaseio.com',
+      projectId: 'zeo-iot',
+      storageBucket: 'zeo-iot.appspot.com',
+      messagingSenderId: '89853385275',
+      appId: '1:89853385275:web:47256761e2e04d9d09da1e',
+      measurementId: 'G-R63V4K59EM'
     }
 };
