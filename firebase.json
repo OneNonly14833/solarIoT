@@ -1,11 +1,10 @@
 {
   "firestore": {
     "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "indexes": "y"
   },
   "hosting": {
-    "target": "web",
-    "public": "dist/cadenseWeb",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -16,18 +15,6 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "redirects": [ {
-      "source": "/",
-      "destination": "/homepage",
-      "type": 301
-      },
-      {
-        "regex": "/firebase/.*",
-        "destination": "/homepage",
-        "type": 301
-      }
-     ]
-
+    ]
   }
 }
