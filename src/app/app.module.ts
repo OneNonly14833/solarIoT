@@ -14,6 +14,12 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { Page404Component } from './page404/page404.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +33,11 @@ import { Page404Component } from './page404/page404.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatCardModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

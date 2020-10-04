@@ -1,0 +1,23 @@
+.text-center{
+  display: flex;
+  align-items: center;
+  text-align: center !important;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.form-signin{
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.title{
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.subtitle{
+  font-size: 24px;
+}

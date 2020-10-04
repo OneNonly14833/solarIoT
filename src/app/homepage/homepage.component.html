@@ -2,50 +2,38 @@
   <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <a class="navbar-brand my-0 mr-md-auto font-weight-normal" routerLink='/' routerLinkActive="activebutton"><strong>ZEO Solar IoT Dashboard</strong></a>
       <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" href="#">About Us</a>
-          <a class="p-2 text-dark" href="#">Product</a>
-          <a class="p-2 text-dark" href="#">Service</a>
-          <!--<a class="p-2 text-dark" href="#">TBD</a>-->
+          <button mat-flat-button color="warn" href="#" style="margin: 2px;">Solar Emissivity</button>
+          <button mat-flat-button color="warn"  href="#" style="margin: 2px;">Humidity and Temperature</button>
+          <button mat-flat-button color="warn"  href="#" style="margin: 2px;">Power Generation</button>
       </nav>
       <div *ngIf="checkUser; then thenBlock else elseBlock"></div>
-      <ng-template #thenBlock><a class="btn btn-outline-primary" routerLink='/login' routerLinkActive="activebutton">Login</a></ng-template>
-      <ng-template #elseBlock><a class="btn btn-outline-primary" (click)="logout()">Logout</a></ng-template>
+      <ng-template #thenBlock><button mat-raised-button color="primary" routerLink='/login' routerLinkActive="activebutton">Login</button></ng-template>
+      <ng-template #elseBlock><button mat-raised-button color="primary" (click)="logout()">Logout</button></ng-template>
   </div>
 </header>
-
-<main role="main">
-  <section class="jumbotron text-center">
-      <div class="container">
-          <!-- <img src="/assets/Company Logo.png"/> -->
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-          <p>
-              <a href="#" class="btn btn-primary my-2" style="margin: 3px">Main call to action</a>
-              <a href="#" class="btn btn-secondary my-2" style="margin: 3px">Secondary action</a>
-          </p>
-      </div>
-  </section>
-  <div class="">
-      <ul>
-          <li *ngFor="let item of items | async">
-              {{ item.name }}
-          </li>
-      </ul>
-  </div>
-  <ngx-charts-line-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
-  [results]="multi"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  >
-  </ngx-charts-line-chart>
-</main>
+<div>
+  <button mat-raised-button>Basic</button>
+</div>
+<mat-grid-list cols="3" rowHeight="2:1">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <ngx-charts-line-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="multi"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+    >
+    </ngx-charts-line-chart>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

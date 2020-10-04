@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { multi } from './data';
+
 import { AuthenticationService } from '../../app/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
@@ -19,6 +21,7 @@ export class HomepageComponent implements OnInit {
   checkUser = true;
   private itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<any[]>;
+
   multi: any[];
   view: any[] = [700, 300];
 
