@@ -1,22 +1,22 @@
-export var irradianceg = [
+export var temperatureg = [
   {
-    "name": "Irradiance",
+    "name": "Temperature",
     "series": [
       {
         "name": "12:50",
-        "value": 50,
+        "value": 31.5,
       },
       {
         "name": "13:00",
-        "value": 60,
+        "value": 30.7,
       },
       {
         "name": "13:10",
-        "value": 55,
+        "value": 31.2,
       },
       {
         "name": "13:20",
-        "value": 58,
+        "value": 31.6,
       }
     ]
   },

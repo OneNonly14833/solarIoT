@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { powerg } from './power';
+import { irradianceg } from './irradiance';
+import { temperatureg } from './temperature';
 
 import { AuthenticationService } from '../../app/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -46,6 +48,8 @@ export class HomepageComponent implements OnInit {
   selectedLocation = this.locations[0].value;
 
   powerg: any[];
+  irradianceg: any[];
+  temperatureg: any[];
   view: any[] = [600, 300];
 
   // options
@@ -56,6 +60,7 @@ export class HomepageComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
+  autoScale: boolean = true;
   xAxisLabel1: string = 'Time (min)';
   yAxisLabel1: string = 'Temperature (°C)';
   xAxisLabel2: string = 'Time (min)';
@@ -71,6 +76,8 @@ export class HomepageComponent implements OnInit {
       this.itemsCollection = afs.collection('items');
       this.items = this.itemsCollection.valueChanges();
       Object.assign(this, { powerg });
+      Object.assign(this, { temperatureg });
+      Object.assign(this, { irradianceg });
       this.authC.userStatus$.subscribe(value => { //Using JSON observable to monitor Authentication Service user login
         // console.log(value);
         // this.checkUser = value;

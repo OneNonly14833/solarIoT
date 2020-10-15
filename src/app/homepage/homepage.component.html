@@ -22,11 +22,11 @@
 <div>
   <div class="container">
     <mat-grid-list cols="1"rowHeight="50">
-      <mat-grid-tile rowspan="2">
-        <h1 style="font-size: 52px; font-weight: bold;">{{ this.total }} kWh</h1>
-      </mat-grid-tile>
       <mat-grid-tile>
         <h1 style="font-size: 42px; font-weight: bold;">Total Power Generated</h1>
+      </mat-grid-tile>
+      <mat-grid-tile rowspan="2">
+        <h1 style="font-size: 52px; font-weight: bold;">{{ this.total }} kWh</h1>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
@@ -50,6 +50,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [legend]="legend"
+        [autoScale]="autoScale"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxis]="xAxis"
@@ -57,7 +58,7 @@
         [xAxisLabel]="xAxisLabel1"
         [yAxisLabel]="yAxisLabel1"
         [timeline]="timeline"
-        [results]="powerg"
+        [results]="temperatureg"
         (select)="onSelect($event)"
         (activate)="onActivate($event)"
         (deactivate)="onDeactivate($event)"
@@ -69,6 +70,7 @@
       [view]="view"
       [scheme]="colorScheme"
       [legend]="legend"
+      [autoScale]="autoScale"
       [showXAxisLabel]="showXAxisLabel"
       [showYAxisLabel]="showYAxisLabel"
       [xAxis]="xAxis"
@@ -76,7 +78,7 @@
       [xAxisLabel]="xAxisLabel2"
       [yAxisLabel]="yAxisLabel2"
       [timeline]="timeline"
-      [results]="powerg"
+      [results]="irradianceg"
       (select)="onSelect($event)"
       (activate)="onActivate($event)"
       (deactivate)="onDeactivate($event)"
@@ -88,6 +90,7 @@
       [view]="view"
       [scheme]="colorScheme"
       [legend]="legend"
+      [autoScale]="autoScale"
       [showXAxisLabel]="showXAxisLabel"
       [showYAxisLabel]="showYAxisLabel"
       [xAxis]="xAxis"
