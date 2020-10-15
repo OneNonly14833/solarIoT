@@ -20,13 +20,17 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import { SettingComponent } from './setting/setting.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     LoginComponent,
-    Page404Component
+    Page404Component,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatGridListModule,
     MatCardModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

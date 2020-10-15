@@ -3,15 +3,20 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { multi } from './data';
+import { powerg } from './power';
 
 import { AuthenticationService } from '../../app/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 export interface Item { name: string; }
+
+interface Location {
+  value: string;
+  label: string;
+}
 
 @Component({
   selector: 'app-homepage',
@@ -22,23 +27,41 @@ export interface Item { name: string; }
 export class HomepageComponent implements OnInit {
   disableSelect = new FormControl(false);
   checkUser = true;
-  location = 'Location 1';
+  location = 'Location';
+  total = '1564';
+  humidity = '80';
+  temperature = '76.1';
+  power = '254';
+  irradiance = '50';
+  timestamp = '25th June 2020 22:10';
+
   private itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<any[]>;
 
-  multi: any[];
-  view: any[] = [700, 300];
+  locations: Location[] = [
+    {value: 'location1', label: 'Location 1'},
+    {value: 'location2', label: 'Location 2'},
+    {value: 'location3', label: 'Location 3'},
+  ];
+  selectedLocation = this.locations[0].value;
+
+  powerg: any[];
+  view: any[] = [600, 300];
 
   // options
-  legend: boolean = true;
+  legend: boolean = false;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
+  xAxisLabel1: string = 'Time (min)';
+  yAxisLabel1: string = 'Temperature (°C)';
+  xAxisLabel2: string = 'Time (min)';
+  yAxisLabel2: string = 'Irradiance (W/m²)';
+  xAxisLabel3: string = 'Time (min)';
+  yAxisLabel3: string = 'Power (W)';
   timeline: boolean = true;
 
   colorScheme = {
@@ -47,7 +70,7 @@ export class HomepageComponent implements OnInit {
   constructor(private afs: AngularFirestore, private authC: AuthenticationService, private authCheck: AngularFireAuth){
       this.itemsCollection = afs.collection('items');
       this.items = this.itemsCollection.valueChanges();
-      Object.assign(this, { multi });
+      Object.assign(this, { powerg });
       this.authC.userStatus$.subscribe(value => { //Using JSON observable to monitor Authentication Service user login
         // console.log(value);
         // this.checkUser = value;
