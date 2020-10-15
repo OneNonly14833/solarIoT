@@ -1,39 +1,86 @@
-<header>
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <a class="navbar-brand my-0 mr-md-auto font-weight-normal" routerLink='/' routerLinkActive="activebutton"><strong>ZEO Solar IoT Dashboard</strong></a>
-      <nav class="my-2 my-md-0 mr-md-3">
-          <button mat-flat-button color="warn" href="#" style="margin: 2px;">Solar Emissivity</button>
-          <button mat-flat-button color="warn"  href="#" style="margin: 2px;">Humidity and Temperature</button>
-          <button mat-flat-button color="warn"  href="#" style="margin: 2px;">Power Generation</button>
-      </nav>
-      <div *ngIf="checkUser; then thenBlock else elseBlock"></div>
-      <ng-template #thenBlock><button mat-raised-button color="primary" routerLink='/login' routerLinkActive="activebutton">Login</button></ng-template>
-      <ng-template #elseBlock><button mat-raised-button color="primary" (click)="logout()">Logout</button></ng-template>
-  </div>
-</header>
-<div>
-  <button mat-raised-button>Basic</button>
+<div class="header">
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile>
+      <a style="color:black;font-size: 24px;" routerLink='/' routerLinkActive="activebutton"><strong>ZEO Solar IoT Dashboard</strong></a>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label style="color: black;">{{ this.location }}</mat-label>
+        <mat-select [disabled]="disableSelect.value">
+          <mat-option value="option1">Location 1</mat-option>
+          <mat-option value="option2">Location 2</mat-option>
+          <mat-option value="option3">Location 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button mat-raised-button color="basic" href="#" style="margin: 2px;">Settings</button>
+      <button mat-raised-button style="margin-left: 5px" color="basic" (click)="logout()">Logout</button>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
-<mat-grid-list cols="3" rowHeight="2:1">
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile>
-    <ngx-charts-line-chart
-    [view]="view"
-    [scheme]="colorScheme"
-    [legend]="legend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxis]="xAxis"
-    [yAxis]="yAxis"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [timeline]="timeline"
-    [results]="multi"
-    (select)="onSelect($event)"
-    (activate)="onActivate($event)"
-    (deactivate)="onDeactivate($event)"
-    >
-    </ngx-charts-line-chart>
-  </mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-</mat-grid-list>
+<div>
+  <mat-grid-list cols="3" rows="2" rowHeight="3:2">
+    <mat-grid-tile>Somethings</mat-grid-tile>
+    <mat-grid-tile>Else </mat-grid-tile>
+    <mat-grid-tile>Here</mat-grid-tile>
+    <mat-grid-tile>
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="multi"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        >
+        </ngx-charts-line-chart>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="multi"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-line-chart>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="multi"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      >
+      </ngx-charts-line-chart>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

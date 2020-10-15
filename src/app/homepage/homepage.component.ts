@@ -9,6 +9,8 @@ import { AuthenticationService } from '../../app/authentication.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
+import {FormControl} from '@angular/forms';
+
 export interface Item { name: string; }
 
 @Component({
@@ -18,7 +20,9 @@ export interface Item { name: string; }
 })
 
 export class HomepageComponent implements OnInit {
+  disableSelect = new FormControl(false);
   checkUser = true;
+  location = 'Location 1';
   private itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<any[]>;
 
