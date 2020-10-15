@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "cadense-669b3"
+    "default": "zeo-iot"
   },
   "targets": {
-    "cadense-669b3": {
+    "zeo-iot": {
       "hosting": {
         "web": [
-          "cadense-669b3"
+          "zeo-iot"
         ]
       }
     }
