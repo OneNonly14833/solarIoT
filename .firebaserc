@@ -1,14 +1,5 @@
 {
   "projects": {
     "default": "zeo-iot"
-  },
-  "targets": {
-    "zeo-iot": {
-      "hosting": {
-        "web": [
-          "zeo-iot"
-        ]
-      }
-    }
   }
 }
