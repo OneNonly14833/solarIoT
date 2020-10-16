@@ -7,8 +7,8 @@
       <mat-card style="width: 80%; padding-top: 5%; text-align: center; font-size: 18px;">
         <mat-form-field appearance="fill" color="accent">
           <mat-label style="font-size: 18px; font-weight: bold;">{{ this.location }}</mat-label>
-          <mat-select [(value)]="selectedLocation" style="color: black;">
-            <mat-option [value]="location.value" *ngFor="let location of locations">{{ location.label }}</mat-option>
+          <mat-select #loc (selectionChange)="updateParam(loc.value)" [(value)]="selectedLocation" style="color: black;">
+            <mat-option [value]="data.label" *ngFor='let data of this.newData'>{{ data.value }}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-card>
@@ -109,7 +109,7 @@
   <mat-grid-list cols="4" rowHeight="100">
     <mat-grid-tile colspan="4">
       <mat-card style="width: 80%; text-align: center;">
-        <h1 style="font-size: 32px; font-weight: bold;">Last Update: {{ this.timestamp }}</h1>
+        <h1 style="font-size: 32px; font-weight: bold;">Last Update: {{ this.timestamp}}</h1>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile>
@@ -125,19 +125,19 @@
       <h1 style="font-size: 32px; font-weight: bold;">Irradiance</h1>
     </mat-grid-tile>
     <mat-grid-tile>
-      <mat-card style="width: 50%; text-align: center;">
+      <button mat-raised-button color="basic" style="width: 50%; padding-top: 3%; text-align: center;">
         <h1 style="font-size: 24px;">{{ this.humidity }} %RH</h1>
-      </mat-card>
+      </button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <mat-card style="width: 50%; text-align: center;">
+      <button mat-raised-button color="basic" style="width: 50%; padding-top: 3%; text-align: center;">
         <h1 style="font-size: 24px;">{{ this.temperature }} °C</h1>
-      </mat-card>
+      </button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <mat-card style="width: 50%; text-align: center;">
+      <button mat-raised-button color="basic" style="width: 50%; padding-top: 3%; text-align: center;">
         <h1 style="font-size: 24px;">{{ this.power }} W</h1>
-      </mat-card>
+      </button>
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-card style="width: 50%; text-align: center;">
@@ -146,4 +146,8 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-
+<!-- <div>
+  <ul>
+    <li *ngFor='let data of this.newData'>{{data.value}}</li>
+  </ul>
+</div> -->

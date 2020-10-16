@@ -13,16 +13,17 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { Page404Component } from './page404/page404.component';
+import { SettingComponent } from './setting/setting.component';
+import { GraphComponent } from './graph/graph.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
-import { SettingComponent } from './setting/setting.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SettingComponent } from './setting/setting.component';
     HomepageComponent,
     LoginComponent,
     Page404Component,
-    SettingComponent
+    SettingComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
