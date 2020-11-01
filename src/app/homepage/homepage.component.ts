@@ -30,11 +30,20 @@ export interface Location {
 })
 
 export class HomepageComponent implements OnInit {
-  total = '1564';
-  humidity = '80';
-  temperature = '76.1';
-  power = '254';
-  irradiance = '50';
+  total = 1564;
+  humidity = 80.0;
+  temperature = 36.1;
+
+  aCurrent = 0;
+  aDCRef = 3.3;
+  supVolt = 2.34;
+  aSensitiv = 44;
+  aCal = 0.3;
+  power = 254;
+
+  pCurrent = 0;
+  irradiance = 50;
+
   timestamp: any;
   newData: Location[];
   powerg: any[];
@@ -80,14 +89,29 @@ export class HomepageComponent implements OnInit {
       this.timestamp = value;
       // console.log(this.timestamp);
     });
-    this.graphP.graphPower$.subscribe(value => {
-      this.powerg = [...value];
+    this.graphP.sensorUpdate$.subscribe(value => {
+      this.humidity = value[9].humd;
+      this.temperature = value[9].temp;
+      this.irradiance = value[9].humd;
+      console.log(Number(value[9].aCur));
+      this.aCurrent = (((((Number(value[9].aCur) * this.aDCRef) / 1024) - this.supVolt) * 1000) / this.aSensitiv) + this.aCal;
+      console.log(this.aCurrent);
+      this.power = 240 * this.aCurrent;
+      console.log(value);
     });
-    this.graphP.graphIrradiance$.subscribe(value => {
-      this.irradianceg = [...value];
-    });
+    // this.graphP.graphPower$.subscribe(value => {
+    //   this.powerg = [...value];
+    // });
+    // this.graphP.graphIrradiance$.subscribe(value => {
+    //   this.irradianceg = [...value];
+    // });
     this.graphP.graphTemperature$.subscribe(value => {
-      this.temperatureg = [...value];
+      // console.log(value);
+      value.forEach(x => {
+          console.log(x.time);
+          console.log(x.temp);
+      });
+      // this.temperatureg = [...value];
     });
     this.authC.userStatus$.subscribe(value => { // Using JSON observable to monitor Authentication Service user login
       // console.log(value);

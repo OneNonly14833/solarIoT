@@ -139,9 +139,14 @@
       </button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button mat-raised-button color="basic" style="width: 50%; padding-top: 3%; text-align: center;">
-        <h1 style="font-size: 24px;">{{ this.power }} W</h1>
+      <button *ngIf='this.power > 0; else elsePower' mat-raised-button color="basic" style="width: 50%; padding-top: 3%; text-align: center;">
+          <h1 style="font-size: 24px;">{{ this.power | number:'1.0-0' }} W</h1>
       </button>
+      <ng-template #elsePower>
+        <button mat-raised-button color="basic" style="width: 50%; padding-top: 3%; text-align: center;">
+          <h1 style="font-size: 24px;">Check sensor</h1>
+        </button>
+      </ng-template>
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-card style="width: 50%; text-align: center;">
