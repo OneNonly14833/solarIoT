@@ -2,13 +2,14 @@ import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, Subject } from 'rxjs';
 
 import { powerg } from './homepage/power';
 import { irradianceg } from './homepage/irradiance';
 import { temperatureg } from './homepage/temperature';
 
-export interface Data {
+export interface Data{
   name: string;
   value: number;
 }
@@ -39,18 +40,24 @@ export class GraphPlotService {
   graphTemperature$ = this.temperature.asObservable();
   private irradiance: Subject<any> = new Subject<any>();
   graphIrradiance$ = this.irradiance.asObservable();
+  testData: Observable<any>;
 
-  constructor(private afs: AngularFirestore){
+  constructor(private afs: AngularFirestore, private db: AngularFireDatabase){
    }
    updateLoc(value: string): void{
     console.log(value);
     this.locationSelect = value;
-    this.dataCollection = this.afs.doc<DataT>(this.locationSelect + '/lastUpdate');
-    this.datas = this.dataCollection.valueChanges();
-    this.datas.forEach(x => {
-      // console.log(x);
+    // this.dataCollection = this.afs.doc<DataT>(this.locationSelect + '/lastUpdate');
+    // this.datas = this.dataCollection.valueChanges();
+    // this.datas.forEach(x => {
+    //   // console.log(x);
+    //   this.times.next(x);
+    // });
+    this.testData = this.db.object('/locations/' + this.locationSelect + '/lastUpdate').valueChanges();
+    this.testData.forEach(x => {
       this.times.next(x);
     });
+
     this.powerCollection = this.afs.collection<Data>('location1/power/series');
     this.powers = this.powerCollection.valueChanges();
     this.powers.forEach(x => {

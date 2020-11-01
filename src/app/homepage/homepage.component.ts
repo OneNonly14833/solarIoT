@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, Subject } from 'rxjs';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -19,6 +20,7 @@ export interface Item {
 export interface Location {
   value: string;
   label: string;
+  name: string;
 }
 
 @Component({
@@ -63,25 +65,21 @@ export class HomepageComponent implements OnInit {
   disableSelect = new FormControl(false);
   checkUser = true;
   location = 'Location';
-
-  locations: Location[] = [
-    {value: 'location1', label: 'Location 1'},
-    {value: 'location2', label: 'Location 2'},
-    {value: 'location3', label: 'Location 3'},
-  ];
-  selectedLocation = this.locations[0].value;
+  selectedLocation: any;
 
   private dataCollection: AngularFirestoreCollection<Location>;
   datas: Observable<Location[]>;
+  dataTest: Observable<any>;
 
   datar: any;
   temp: any[];
   today: number = Date.now();
-  constructor(private afs: AngularFirestore, private authC: AuthenticationService, private authCheck: AngularFireAuth, private graphP: GraphPlotService, public router: Router){
+  constructor(private db: AngularFireDatabase, private afs: AngularFirestore, private authC: AuthenticationService, private authCheck: AngularFireAuth, private graphP: GraphPlotService, public router: Router){
     this.graphP.dataUpdate$.subscribe(value => {
-      this.timestamp = value.lastUpdate.toDate();
+      // this.timestamp = value.lastUpdate.toDate();
+      this.timestamp = value;
       // console.log(this.timestamp);
-    })
+    });
     this.graphP.graphPower$.subscribe(value => {
       this.powerg = [...value];
     });
@@ -117,18 +115,29 @@ export class HomepageComponent implements OnInit {
     console.log('Update Trigger');
     this.router.navigate(['/dashboard'], { queryParams: { loc: value } });
     this.graphP.updateLoc(value);
+    this.location = value;
   }
-
   ngOnInit(): void {
-    this.dataCollection = this.afs.collection<Location>('users/ZEOIOT/locations');
-    this.datas = this.dataCollection.valueChanges();
-    this.datas.forEach(x => {
+    // this.dataCollection = this.afs.collection<Location>('users/ZEOIOT/locations');
+    // this.datas = this.dataCollection.valueChanges();
+    // this.datas.forEach(x => {
+    //   this.newData = x;
+    //   this.selectedLocation = this.newData[0].label;
+    //   // console.log(this.selectedLocation);
+    //   this.router.navigate(['/dashboard'], { queryParams: { loc: this.selectedLocation } });
+    //   console.log('Init Trigger');
+    //   this.graphP.updateLoc(this.selectedLocation);
+    // });
+    this.dataTest = this.db.list('users/ZEO/locations').valueChanges();
+    this.dataTest.forEach(x => {
+      console.log(x);
       this.newData = x;
-      this.selectedLocation = this.newData[0].label;
+      this.selectedLocation = this.newData[0];
       // console.log(this.selectedLocation);
-      this.router.navigate(['/dashboard'], { queryParams: { loc: this.selectedLocation } });
+      this.router.navigate(['/dashboard'], { queryParams: { loc: this.selectedLocation.value } });
       console.log('Init Trigger');
-      this.graphP.updateLoc(this.selectedLocation);
+      this.graphP.updateLoc(this.selectedLocation.value);
+      this.location = this.selectedLocation.value;
     });
   }
 

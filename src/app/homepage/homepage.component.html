@@ -8,7 +8,7 @@
         <mat-form-field appearance="fill" color="accent">
           <mat-label style="font-size: 18px; font-weight: bold;">{{ this.location }}</mat-label>
           <mat-select #loc (selectionChange)="updateParam(loc.value)" [(value)]="selectedLocation" style="color: black;">
-            <mat-option [value]="data.label" *ngFor='let data of this.newData'>{{ data.value }}</mat-option>
+            <mat-option [value]="data.value" *ngFor='let data of this.newData'>{{ data.name }}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-card>
@@ -109,7 +109,11 @@
   <mat-grid-list cols="4" rowHeight="100">
     <mat-grid-tile colspan="4">
       <mat-card style="width: 80%; text-align: center;">
-        <h1 style="font-size: 32px; font-weight: bold;">Last Update: {{ this.timestamp}}</h1>
+        <div *ngIf="this.timestamp; else elseBlock"><h1 style="font-size: 32px; font-weight: bold;">Last Update: {{ this.timestamp | date: 'full'}}</h1>
+        </div>
+        <ng-template #elseBlock>
+          <h1 style="font-size: 32px; font-weight: bold;">Last Update: Location invalid</h1>
+        </ng-template>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile>
